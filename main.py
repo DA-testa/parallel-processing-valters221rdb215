@@ -2,13 +2,10 @@
 
 def parallel_processing(n, m, data):
     output = []
-    threadnr = [0] * n
+    threadnr = [0] *n
     
     for i in range(m):
-        nextthrd = 0
-        for v in range(1, n):
-            if threadnr[v] < threadnr[nextthrd]:
-                nextthrd = v
+        nextthrd = threadnr.index(min(threadnr))
         sakums = threadnr[nextthrd]
         beigas = sakums + data[i]
         
@@ -22,15 +19,15 @@ def main():
  
     n, m = map(int, input().split())
     if not (1 <= n <= 10**5):
-        raise ValueError("n should be between 1 and 10^5")
+        raise ValueError("Error - n isnt between 1 and 10^5")
     if not (1 <= m <= 10**5):
-        raise ValueError("m should be between 1 and 10^5")
+        raise ValueError("Error: m isnt between 1 and 10^5")
     data = list(map(int, input().split()))
     if len(data) != m:
-        raise ValueError("the length of data should be equal to m")
+        raise ValueError("Error: the length of data isnt equal to m")
     for i in range(m):
         if not (0 <= data[i] <= 10**9):
-            raise ValueError("each element in data should be between 0 and 10^9")
+            raise ValueError("Error: each element in data isnt between 0 and 10^9")
 
     result = parallel_processing(n, m, data)
     
